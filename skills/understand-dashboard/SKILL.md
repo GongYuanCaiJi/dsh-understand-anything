@@ -67,27 +67,17 @@ Start the Understand Anything dashboard to visualize the knowledge graph for the
    COPILOT_SKILL_REAL=$(realpath ~/.copilot/skills/understand-dashboard 2>/dev/null || readlink -f ~/.copilot/skills/understand-dashboard 2>/dev/null || echo "")
    COPILOT_SELF_RELATIVE=$([ -n "$COPILOT_SKILL_REAL" ] && cd "$COPILOT_SKILL_REAL/../.." 2>/dev/null && pwd || echo "")
 
-   # dsh (DeepSeek Harness) installs this skill in the plugin bundle at
-   # <plugin-root>/skills/understand-dashboard; the plugin root is two
-   # directories above the skill's base directory (the harness reports it
-   # as the skill's base directory — substitute it for <SKILL_DIR> here).
-   DSH_SKILL_DIR="<SKILL_DIR>"
-   DSH_SELF_RELATIVE=$([ -n "$DSH_SKILL_DIR" ] && cd "$DSH_SKILL_DIR/../.." 2>/dev/null && pwd || echo "")
-
    PLUGIN_ROOT=""
    for candidate in \
      "${CLAUDE_PLUGIN_ROOT}" \
      "$HOME/.understand-anything-plugin" \
      "$SELF_RELATIVE" \
      "$COPILOT_SELF_RELATIVE" \
-     "$DSH_SELF_RELATIVE" \
      "$HOME/.codex/understand-anything/understand-anything-plugin" \
      "$HOME/.opencode/understand-anything/understand-anything-plugin" \
      "$HOME/.pi/understand-anything/understand-anything-plugin" \
      "$HOME/understand-anything/understand-anything-plugin"; do
-     # 移植版 dsh 套件不含 packages/dashboard（web 应用不搬）；dsh 候选只要求
-     # 套件根存在，viewer 由下面的 npx fast path 从上游 releases 拉取。
-     if [ -n "$candidate" ] && { [ -d "$candidate/packages/dashboard" ] || { [ "$candidate" = "$DSH_SELF_RELATIVE" ] && [ -f "$candidate/package.json" ] && [ -f "$candidate/pnpm-workspace.yaml" ]; }; }; then
+     if [ -n "$candidate" ] && [ -d "$candidate/packages/dashboard" ]; then
        PLUGIN_ROOT="$candidate"; break
      fi
    done

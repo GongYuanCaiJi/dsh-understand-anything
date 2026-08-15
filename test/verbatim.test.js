@@ -14,12 +14,11 @@ const manifest = JSON.parse(readFileSync(join(ROOT, 'test', 'fixtures', 'verbati
 
 const sha256 = (p) => createHash('sha256').update(readFileSync(p)).digest('hex');
 
-// 逐字范围：manifest 涵盖的顶层路径（3 个适配过的 SKILL.md 不属逐字范围，见 THIRD_PARTY_NOTICES）
+// 逐字范围：manifest 涵盖的顶层路径（2 个适配过的 SKILL.md 不属逐字范围，见 THIRD_PARTY_NOTICES）
 const SCOPED_DIRS = ['skills', 'agents', 'packages'];
 const ADAPTED = new Set([
   'skills/understand/SKILL.md',
   'skills/understand-domain/SKILL.md',
-  'skills/understand-dashboard/SKILL.md',
 ]);
 
 function walk(dir) {
@@ -34,7 +33,7 @@ function walk(dir) {
 
 test('保真: 每个 manifest 档案的 SHA-256 逐字相符', () => {
   const entries = Object.entries(manifest);
-  assert.equal(entries.length, 241, 'manifest 钉 241 个档案（3 个适配 SKILL.md 除外）');
+  assert.equal(entries.length, 242, 'manifest 钉 242 个档案（2 个适配 SKILL.md 除外）');
   for (const [rel, expected] of entries) {
     const p = join(ROOT, rel);
     assert.equal(sha256(p), expected, `${rel}: SHA-256 不符（上游逐字内容被改过）`);
@@ -58,7 +57,7 @@ test('保真: manifest 与 THIRD_PARTY_NOTICES.md 的 SHA-256 表一致', () => 
   const table = new Map(
     [...notices.matchAll(/^\| `([^`]+)` \| `([0-9a-f]{64})` \|$/gm)].map((m) => [m[1], m[2]]),
   );
-  assert.ok(table.size >= 241, `NOTICES 表至少 241 行（实际 ${table.size}）`);
+  assert.ok(table.size >= 242, `NOTICES 表至少 242 行（实际 ${table.size}）`);
   for (const [rel, hash] of Object.entries(manifest)) {
     assert.equal(table.get(rel), hash, `NOTICES 表 ${rel} 与 manifest 一致`);
   }

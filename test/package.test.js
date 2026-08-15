@@ -74,7 +74,7 @@ test('THIRD_PARTY_NOTICES.md: 钉住上游 commit 身分', () => {
   for (const pin of [
     '`32944829e7a63a9fa9c55d811d7f98a9530c6a6a`',
     'Egonex-AI/Understand-Anything',
-    '241 档',
+    '242 档',
   ]) {
     assert.ok(notices.includes(pin), `NOTICES 含 ${pin}`);
   }

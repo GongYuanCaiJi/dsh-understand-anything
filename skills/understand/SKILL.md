@@ -114,6 +114,7 @@ Determine whether to run a full analysis or incremental update.
      echo "  - $HOME/.understand-anything-plugin"
      echo "  - ${SELF_RELATIVE:-<unresolved path derived from ~/.agents/skills/understand>}"
      echo "  - ${COPILOT_SELF_RELATIVE:-<unresolved path derived from ~/.copilot/skills/understand>}"
+     echo "  - ${DSH_SELF_RELATIVE:-<unresolved path derived from <SKILL_DIR>/../..>}"
      echo "  - $HOME/.codex/understand-anything/understand-anything-plugin"
      echo "  - $HOME/.opencode/understand-anything/understand-anything-plugin"
      echo "  - $HOME/.pi/understand-anything/understand-anything-plugin"

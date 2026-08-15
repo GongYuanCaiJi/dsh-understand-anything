@@ -97,7 +97,7 @@ dsh plugin --profile <你的 profile> add .
   —— 均**未搬入**本套件。需要看板/查看器请到
   [上游仓库](https://github.com/Egonex-AI/Understand-Anything) 获取。
 - Claude Code 专属的 `hooks/`（提交后自动更新）、平台安装脚本与各平台清单未搬入。
-- 逐字保真清单见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)（241 档 SHA-256 可自验）。
+- 逐字保真清单见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)（242 档 SHA-256 可自验）。
 
 ## 📜 License
 
@@ -172,7 +172,7 @@ boundary, not a choice:
 - Claude Code-specific `hooks/` (post-commit auto-update), platform install scripts, and
   platform manifests are not included.
 - Verbatim-fidelity manifest: [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)
-  (241 files, SHA-256 verifiable).
+  (242 files, SHA-256 verifiable).
 
 ## 📜 License
 

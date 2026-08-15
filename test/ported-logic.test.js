@@ -67,3 +67,37 @@ test('ported-logic: parse-knowledge-base.py 对小型 wiki fixture 产出 scan-m
     rmSync(fixture, { recursive: true, force: true });
   }
 });
+
+test('ported-logic: merge-batch-graphs.py 合并两个 batch 产出 assembled-graph.json', { skip: !havePython() && 'python3 不可用' }, () => {
+  const fixture = join(ROOT, 'test', 'fixtures', 'tmp-merge');
+  rmSync(fixture, { recursive: true, force: true });
+  mkdirSync(join(fixture, '.ua', 'intermediate'), { recursive: true });
+  // 两个 batch：各自 nodes/edges，filename 必须符合 batch-<N>.json 模式
+  writeFileSync(
+    join(fixture, '.ua', 'intermediate', 'batch-1.json'),
+    JSON.stringify({
+      nodes: [{ id: 'file:src/a.ts', type: 'file', name: 'a.ts', summary: 'A' }],
+      edges: [],
+    }),
+  );
+  writeFileSync(
+    join(fixture, '.ua', 'intermediate', 'batch-2.json'),
+    JSON.stringify({
+      nodes: [{ id: 'file:src/b.ts', type: 'file', name: 'b.ts', summary: 'B' }],
+      edges: [{ source: 'file:src/a.ts', target: 'file:src/b.ts', type: 'imports' }],
+    }),
+  );
+  try {
+    execFileSync('python3', [join(ROOT, 'skills', 'understand', 'merge-batch-graphs.py'), fixture], {
+      cwd: ROOT,
+      stdio: 'pipe',
+    });
+    const out = join(fixture, '.ua', 'intermediate', 'assembled-graph.json');
+    assert.ok(existsSync(out), 'assembled-graph.json 必须被产出');
+    const data = JSON.parse(readFileSync(out, 'utf8'));
+    assert.equal(data.nodes.length, 2, '两个 batch 的 node 都合并进来');
+    assert.equal(data.edges.length, 1, 'edge 合并进来');
+  } finally {
+    rmSync(fixture, { recursive: true, force: true });
+  }
+});

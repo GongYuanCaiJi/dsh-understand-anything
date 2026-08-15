@@ -49,6 +49,7 @@
   "skills/understand/merge-subdomain-graphs.py": "b984a478a18eb7a0186f5374dd733fc001bc77806215bd067f404107911fa059",
   "skills/understand/scan-project.mjs": "8a3cc5b1a25c11aa28699c16ab9451c8ba824f35ee0bc956a0d4547e66337d40",
   "skills/understand-chat/SKILL.md": "5f1da70e0849ec2f3005fc232a95ab5f4b1c09cc062ced13945ce8516ca0e5f7",
+  "skills/understand-dashboard/SKILL.md": "d12cb059d8e6139873542111ccec691b0603496675182f5ac826d5b65273331a",
   "skills/understand-diff/SKILL.md": "fc8dc1b216ee1a480daff421c41c27218d7a0db881d35d0c22e9858de5189379",
   "skills/understand-domain/extract-domain-context.py": "3ae26832a8df8090b606d86839d0721cc1c316aaac28e2b8fba77ed6d7455ae7",
   "skills/understand-explain/SKILL.md": "661389c81c9133e6cdc99ba033678300ba7a7a377031396b259a23dad39496fe",

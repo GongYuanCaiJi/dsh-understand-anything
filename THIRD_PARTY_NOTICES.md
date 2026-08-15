@@ -32,16 +32,16 @@ shasum -a 256 <本 repo>/<rel>   # 必须等于下表值
   独立查看器）**不搬**，README 有说明去哪里拿。技能脚本运行时依赖的分析引擎
   `packages/core` 与两个 vendored tree-sitter WASM 语法（`packages/tree-sitter-*-wasm`）
   属于 skill 层的运行机制，**不是** web 应用，一并逐字搬入。
-- 上游 `understand-anything-plugin/` 内的 **241 档逐字未改**（下表）；三个 SKILL.md
-  因 dsh 安装形态无法自行解析插件根而做了**最小适配**，不属逐字范围：
+- 上游 `understand-anything-plugin/` 内的 **242 档逐字未改**（下表）；两个 SKILL.md
+  因 dsh 安装形态无法自行解析插件根而做了**最小适配**（只加候选、不改既有行为），不属逐字范围：
   - `skills/understand/SKILL.md` —— 插件根发现（plugin-root discovery）新增
     `DSH_SKILL_DIR` 候选：dsh 把 skill 装在 `<plugin-root>/skills/<skill>`，
     插件根在 skill 目录上两级；其余候选路径照旧保留。
   - `skills/understand-domain/SKILL.md` —— 同上（该 skill 自己的发现块）。
-  - `skills/understand-dashboard/SKILL.md` —— 同上；且因 web 应用不搬，
-    发现条件放行「套件根存在但无 `packages/dashboard`」的情形，
-    viewer 由 skill 内的 npx fast path 从上游 releases 拉取。
-  - 三处适配都是**加候选、不改既有行为**：非 dsh 安装路径全部照旧。
+  - 适配都是**加候选、不改既有行为**：非 dsh 安装路径全部照旧。
+  - `skills/understand-dashboard/SKILL.md` 保持**逐字原样**——它的目标是 web 应用
+    （dashboard），而 web 应用依票面边界不搬，该 skill 在 dsh 里无法运作是设计内的能力边界，
+    README 已说明去哪里拿。
 - 上游没有的档案（本 repo 新增，非上游内容）：`package.json`（dsh 插件合约）、
   `index.js` / `index.d.ts`（skill provider 转接层）、`cordis.patch.yml`、
   `pnpm-workspace.yaml`（skill 脚本构建 core 所需的工作区）、`README.md`（移植版门面）、
@@ -52,7 +52,7 @@ shasum -a 256 <本 repo>/<rel>   # 必须等于下表值
 - 逐字档案的 SHA-256 与 `test/fixtures/verbatim.sha256.json` 相同
   （`test/verbatim.test.js` 自动核对两者）。
 
-## 逐字档案 SHA-256（241 档）
+## 逐字档案 SHA-256（242 档）
 
 | `skills/understand/build-fingerprints.mjs` | `9b1d0589f0ed1827301edd3585fc7da0340dd29434a5ab3ab54aed1a0a6baca3` |
 | `skills/understand/compute-batches.mjs` | `1fe822bb14df9d4ddc97521a9803eb1b3216300a70c0cb3ea60763429ba7e588` |
@@ -104,6 +104,7 @@ shasum -a 256 <本 repo>/<rel>   # 必须等于下表值
 | `skills/understand/merge-subdomain-graphs.py` | `b984a478a18eb7a0186f5374dd733fc001bc77806215bd067f404107911fa059` |
 | `skills/understand/scan-project.mjs` | `8a3cc5b1a25c11aa28699c16ab9451c8ba824f35ee0bc956a0d4547e66337d40` |
 | `skills/understand-chat/SKILL.md` | `5f1da70e0849ec2f3005fc232a95ab5f4b1c09cc062ced13945ce8516ca0e5f7` |
+| `skills/understand-dashboard/SKILL.md` | `d12cb059d8e6139873542111ccec691b0603496675182f5ac826d5b65273331a` |
 | `skills/understand-diff/SKILL.md` | `fc8dc1b216ee1a480daff421c41c27218d7a0db881d35d0c22e9858de5189379` |
 | `skills/understand-domain/extract-domain-context.py` | `3ae26832a8df8090b606d86839d0721cc1c316aaac28e2b8fba77ed6d7455ae7` |
 | `skills/understand-explain/SKILL.md` | `661389c81c9133e6cdc99ba033678300ba7a7a377031396b259a23dad39496fe` |
