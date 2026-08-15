@@ -1,0 +1,70 @@
+{
+  "name": "dsh-understand-anything",
+  "version": "0.1.0",
+  "description": "理解任何东西技能包（移植自 Understand-Anything）",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "license": "MIT",
+  "author": "GongYuanCaiJi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GongYuanCaiJi/dsh-understand-anything.git"
+  },
+  "homepage": "https://github.com/GongYuanCaiJi/dsh-understand-anything",
+  "bugs": {
+    "url": "https://github.com/GongYuanCaiJi/dsh-understand-anything/issues"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "understand-anything",
+    "codebase-analysis",
+    "knowledge-graph",
+    "architecture",
+    "onboarding",
+    "dashboard",
+    "ai",
+    "llm",
+    "ai-agent",
+    "developer-tools"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "cordis.patch.yml",
+    "pnpm-workspace.yaml",
+    "skills/",
+    "agents/",
+    "packages/core/src/",
+    "packages/core/package.json",
+    "packages/core/tsconfig.json",
+    "packages/core/vitest.config.ts",
+    "packages/tree-sitter-dart-wasm/",
+    "packages/tree-sitter-swift-wasm/",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "test/"
+  ],
+  "dependencies": {
+    "@deepseek-ai/dsh-skill": "0.1.0-rc.6",
+    "graphology": "~0.26.0",
+    "graphology-communities-louvain": "^2.0.2"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node --test test/structure.test.js test/provider.test.js test/verbatim.test.js test/readme.test.js test/package.test.js test/ported-logic.test.js",
+    "prepare": "node --test test/structure.test.js",
+    "prepack": "node --test test/verbatim.test.js",
+    "prepublishOnly": "npm test"
+  }
+}
